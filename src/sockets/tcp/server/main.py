@@ -4,11 +4,11 @@ import random
 HOST = '127.0.0.1'
 PORT = 65432
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.bind((HOST, PORT))
-    s.listen()
-    conn, addr = s.accept()
-    with conn:
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s: # Cria um socket TCP/IP
+    s.bind((HOST, PORT)) # Associa o socket a um endereço e porta
+    s.listen() # Coloca o socket em modo de escuta
+    conn, addr = s.accept() # Aceita uma conexão
+    with conn: # Fecha a conexão quando o bloco with terminar
         print("Conectado com ", addr)
         while True:
             data = conn.recv(1024)
