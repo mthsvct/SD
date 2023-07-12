@@ -6,7 +6,7 @@ HOST = '127.0.0.1'
 PORT = 65432
 
 def enviaAno(s, name):
-    s.settimeout(5)  # Tempo máximo de espera para receber uma resposta do servidor
+    s.settimeout(3)  # Tempo máximo de espera para receber uma resposta do servidor
     for _ in range(5):
         s.sendall(f"{random.randint(0, 2023)},{name}".encode())
         try:
@@ -17,6 +17,7 @@ def enviaAno(s, name):
         if not data:
             break
         print("Recebido do servidor:", data.decode())
+    
 
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -26,3 +27,5 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         t.start()
     for t in thrs: 
         t.join()
+    
+    s.close()  # Fechar a conexão após todas as threads terem terminado
