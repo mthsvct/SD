@@ -7,7 +7,6 @@ def busca(texto, palavra, result):
     for p in palavras:
         if p == palavra:
             count += 1
-    
     result['count'] += count
 
 
